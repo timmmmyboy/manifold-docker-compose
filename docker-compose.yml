@@ -23,7 +23,7 @@ services:
     networks:
       - network1
   api_cable:
-    image: manifoldscholar/manifold_api_cable:${MANIFOLD_TAG}
+    image: manifoldscholar/manifold_api_cable:v5.0.0-alpha.1
     volumes:
       - ./data/api/public:/opt/manifold/api/public
       - ./data/sockets:/manifold_sockets
@@ -34,7 +34,7 @@ services:
     command: ["./start-and-run", "bin/cable"]
 
   api_clockwork:
-    image: manifoldscholar/manifold_api_clockwork:${MANIFOLD_TAG}
+    image: manifoldscholar/manifold_api_clockwork:v5.0.0-alpha.1
     volumes:
       - ./data/api/public:/opt/manifold/api/public
       - ./data/sockets:/manifold_sockets
@@ -45,7 +45,7 @@ services:
       - network1
     command: ["./start-and-run", "bin/zhong zhong.rb"]
   api_rails:
-    image: manifoldscholar/manifold_api_rails:${MANIFOLD_TAG}
+    image: manifoldscholar/manifold_api_rails:v5.0.0-alpha.1
     volumes:
       - ./data/api/public:/opt/manifold/api/public
       - ./data/sockets:/manifold_sockets
@@ -55,7 +55,7 @@ services:
     networks:
       - network1
   api_sidekiq:
-    image: manifoldscholar/manifold_api_sidekiq:${MANIFOLD_TAG}
+    image: manifoldscholar/manifold_api_sidekiq:v5.0.0-alpha.1
     volumes:
       - ./data/api/public:/opt/manifold/api/public
       - ./data/sockets:/manifold_sockets
@@ -65,7 +65,7 @@ services:
       - network1
     command: ["./start-and-run", "bin/sidekiq"]
   client:
-    image: manifoldscholar/manifold_client:${MANIFOLD_TAG}
+    image: manifoldscholar/manifold_client:v5.0.0-alpha.1
     env_file:
       - ./environment/manifold.env
     volumes:
@@ -75,7 +75,7 @@ services:
     networks:
       - network1
   proxy:
-    image: manifoldscholar/manifold_proxy:${MANIFOLD_TAG}
+    image: manifoldscholar/manifold_proxy:v5.0.0-alpha.1
     volumes:
       - ./data/nginx/ssl:/etc/nginx/ssl
       - ./data/api/public:/manifold_data/api/public
@@ -83,8 +83,8 @@ services:
     ports:
       - "4000:4000"
       - "4001:4001"
-#      - "80:80"
-#      - "443:443"
+      - "80:80"
+      - "443:443"
     command: ["nginx", "-g", "daemon off;"]
     networks:
       - network1
